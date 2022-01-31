@@ -1,5 +1,5 @@
 Class {
-	#name : #Player,
+	#name : #Box,
 	#superclass : #Object,
 	#instVars : [
 		'name',
@@ -9,27 +9,27 @@ Class {
 }
 
 { #category : #accessing }
-Player >> name [  
+Box >> name [  
 	^ name
 ]
 
 { #category : #accessing }
-Player >> name: aName [ 
+Box >> name: aName [ 
 	name := aName 
 ]
 
 { #category : #accessing }
-Player >> position [ 
+Box >> position [ 
 	^ position
 ]
 
 { #category : #accessing }
-Player >> position: aPoint [ 
+Box >> position: aPoint [ 
 	position := aPoint 
 ]
 
 { #category : #printing }
-Player >> printOn: aStream [
+Box >> printOn: aStream [
 	
-	aStream << 'P'
+	aStream << 'O'
 ]
