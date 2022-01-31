@@ -14,18 +14,14 @@ Class {
 Game >> addBox: aBox [
 	((tiles at: 2) at: 3) addBox: aBox .
 	"il y a des murs autour du plateau de jeu donc on ne met rien en 1@1"	
-	
-	"(tiles at: 2) at: 3 put: (BoxTile new position: 2@3 )"
-	"la 2e ligne sert à mettre une case boite sur la case où on ajoute la boite mais les tests de présence de boite ne marchent plus"
+	aBox position: 2@3. "pour pouvoir avoir la position de la boite (pour ensuite pouvoir la déplacer)"
 ]
 
 { #category : #adding }
 Game >> addPlayer: aPlayer [
 	((tiles at: 2) at: 2) addPlayer: aPlayer .
 	"il y a des murs autour du plateau de jeu donc on ne met rien en 1@1"
-		
-	"(tiles at: 2) at: 2 put: (PlayerTile new position: 2@2 )"
-	"la ligne ci-dessus sert à mettre une case joueur sur la case où on ajoute le joueur mais les tests de présence de joueur ne marchent plus"
+	aPlayer position: 2@2. "pour pouvoir avoir la position du joueur (pour ensuite pouvoir le déplacer)"
 ]
 
 { #category : #initialization }
@@ -67,6 +63,30 @@ Game >> sizeX: aNumberX sizeY: aNumberY [
 { #category : #'as yet unclassified' }
 Game >> tileAtX: aNumberX atY: aNumberY [
 	^ (tiles at: aNumberY) at: aNumberX 
+]
+
+{ #category : #'as yet unclassified' }
+Game >> tileForPlayerTowardDown: aPlayer [
+
+	^ self tileAtX: aPlayer position x + 1 atY: aPlayer position y
+]
+
+{ #category : #'as yet unclassified' }
+Game >> tileForPlayerTowardLeft: aPlayer [
+
+	^ self tileAtX: aPlayer position x atY: aPlayer position y - 1
+]
+
+{ #category : #'as yet unclassified' }
+Game >> tileForPlayerTowardRight: aPlayer [
+
+	^ self tileAtX: aPlayer position x atY: aPlayer position y + 1
+]
+
+{ #category : #'as yet unclassified' }
+Game >> tileForPlayerTowardUp: aPlayer [
+
+	^ self tileAtX: aPlayer position x - 1 atY: aPlayer position y
 ]
 
 { #category : #'as yet unclassified' }

@@ -36,6 +36,16 @@ GameTest >> testPlayerAtStart [
 ]
 
 { #category : #tests }
+GameTest >> testPlayerAtStartIsAtPosition1at1 [
+
+	| game jack |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack.
+	self assert: jack position equals: 2@2 .
+]
+
+{ #category : #tests }
 GameTest >> testPrintingSimpleGame [
 
 	| game |
@@ -102,4 +112,44 @@ GameTest >> testTileAt [
 	| game |
 	game := Game new sizeX: 5 sizeY: 3.
 	self assert: (game tileAtX: 3 atY: 1) printString equals: 'W'
+]
+
+{ #category : #tests }
+GameTest >> testTileForPlayerTowardDown [
+
+	| game jack |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack.
+	self assert: (game tileForPlayerTowardDown: jack) position equals: 2@3.
+]
+
+{ #category : #tests }
+GameTest >> testTileForPlayerTowardLeft [
+
+	| game jack |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack.
+	self assert: (game tileForPlayerTowardLeft: jack) position equals: 1@2.
+]
+
+{ #category : #tests }
+GameTest >> testTileForPlayerTowardRight [
+
+	| game jack |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack.
+	self assert: (game tileForPlayerTowardRight: jack) position equals: 3@2.
+]
+
+{ #category : #tests }
+GameTest >> testTileForPlayerTowardUp [
+
+	| game jack |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack.
+	self assert: (game tileForPlayerTowardUp: jack) position equals: 2@1.
 ]
