@@ -1,11 +1,11 @@
 Class {
-	#name : #WallTile,
+	#name : #PlayerTile,
 	#superclass : #Tile,
 	#category : #Sokoban
 }
 
 { #category : #printing }
-WallTile >> printOn: aStream [
+PlayerTile >> printOn: aStream [
 	"position printOn: aStream." "si on veut afficher les coordonées du point"
-	aStream << 'W'
+	aStream << 'P'
 ]

@@ -16,6 +16,11 @@ Tile >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+Tile >> position [
+	^ position
+]
+
+{ #category : #'as yet unclassified' }
 Tile >> position: aPoint [
 	position := aPoint
 ]
@@ -24,4 +29,10 @@ Tile >> position: aPoint [
 Tile >> positionX: aNumberX positionY: aNumberY [
 "ne sert pas, finalement j'utilise position: aPoint"
 	position := aNumberX@aNumberY 
+]
+
+{ #category : #printing }
+Tile >> printOn: aStream [
+	"position printOn: aStream." "si on veut afficher les coordonées du point"
+	aStream << '_'
 ]
