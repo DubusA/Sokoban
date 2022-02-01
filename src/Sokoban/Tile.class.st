@@ -61,6 +61,13 @@ Tile >> printOn: aStream [
 ]
 
 { #category : #removing }
+Tile >> removeBox: aBox [
+	"il faut retirer la boite de la liste de boites boxes qu'on a initialisée"
+	"on avait utilisé  add:  pour ajouter une boite, la méthode  remove:  existe aussi"
+	boxes remove: aBox
+]
+
+{ #category : #removing }
 Tile >> removePlayer: aPlayer [
 	"il faut retirer le joueur de la liste de joueurs players qu'on a initialisée"
 	"on avait utilisé  add:  pour ajouter un joueur, la méthode  remove:  existe aussi"

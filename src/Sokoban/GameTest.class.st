@@ -26,9 +26,29 @@ GameTest >> testMovePlayerADirectionRight [
 ]
 
 { #category : #tests }
+GameTest >> testMovePlayerAndBoxADirectionRight [
+
+	| game jack box1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	game addPlayer: jack.
+	game addBox: box1.
+	game movePlayerTowardRight: jack.
+	game moveBoxTowardRight: box1.
+	self assert: jack position equals: 3@2.
+	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
+	self assert: ((game tileAtX: 2 atY: 3 ) players includes: jack) .
+	self assert: box1 position equals: 4@2.
+	self assert: (game tileAtX: 2 atY: 3 ) boxes isEmpty .
+	self assert: ((game tileAtX: 2 atY: 4 ) boxes includes: box1) .
+	
+]
+
+{ #category : #tests }
 GameTest >> testPlayerAndBoxAtStart [
 
-	| game jack box1|
+	| game jack box1 |
 	game := Game new sizeX: 5 sizeY: 3.
 	jack := Player new name: 'Jack'.
 	box1 := Box new name: 'Box1'.

@@ -32,10 +32,50 @@ Game >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+Game >> moveBoxTowardRight: aBox [
+
+	| targetTile |
+	targetTile := self tileForPlayerOrBoxTowardRight: aBox.
+	(self tileOfPlayerOrBox: aBox) removeBox: aBox.
+	targetTile addBox: aBox.
+	aBox position: targetTile position.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> movePlayerTowardDown: aPlayer [
+
+	| targetTile |
+	targetTile := self tileForPlayerOrBoxTowardDown: aPlayer.
+	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
+	targetTile addPlayer: aPlayer.
+	aPlayer position: targetTile position.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> movePlayerTowardLeft: aPlayer [
+
+	| targetTile |
+	targetTile := self tileForPlayerOrBoxTowardLeft: aPlayer.
+	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
+	targetTile addPlayer: aPlayer.
+	aPlayer position: targetTile position.
+]
+
+{ #category : #'as yet unclassified' }
 Game >> movePlayerTowardRight: aPlayer [
 
 	| targetTile |
 	targetTile := self tileForPlayerOrBoxTowardRight: aPlayer.
+	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
+	targetTile addPlayer: aPlayer.
+	aPlayer position: targetTile position.
+]
+
+{ #category : #'as yet unclassified' }
+Game >> movePlayerTowardUp: aPlayer [
+
+	| targetTile |
+	targetTile := self tileForPlayerOrBoxTowardUp: aPlayer.
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
