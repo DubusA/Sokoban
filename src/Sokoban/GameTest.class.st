@@ -51,6 +51,31 @@ GameTest >> testIsOver [
 ]
 
 { #category : #tests }
+GameTest >> testIsOverWithTwoBoxes [
+"pour vérifier que ça marche même quand il y a deux boites et que box1 est sur goal2 et box2 est sur goal1 (pour vérifier que l'ordre n'a pas d'importance) "
+	| game jack box1 box2 goal1 goal2 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	box2 := Box new name: 'Box2'.
+	goal1 := Goal new name: 'Goal1'.
+	goal2 := Goal new name: 'Goal2'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@3 .
+	game addBox: box2 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+	game addGoal: goal2 atPoint: 5@3 .
+	game moveBoxTowardRight: box1 .
+	game moveBoxTowardRight: box2 .
+	self assert: jack position equals: 3@2 .
+	self assert: box1 position equals: 5@3 .
+	self assert: box2 position equals: 5@2 .
+	self assert: box1 position equals: goal2 position .
+	self assert: box2 position equals: goal1 position .
+	self assert: game isOver .
+]
+
+{ #category : #tests }
 GameTest >> testMovePlayerADirectionRight [
 
 	| game jack |
