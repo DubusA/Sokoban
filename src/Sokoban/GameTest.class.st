@@ -13,6 +13,44 @@ GameTest >> testCheckingSimpleGame [
 ]
 
 { #category : #tests }
+GameTest >> testIsNotOver [
+
+	| game jack box1 goal1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	goal1 := Goal new name: 'Goal1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+"aucun déplacement"
+	self assert: jack position equals: 3@2 .
+	self assert: box1 position equals: 4@2 .
+	self assert: goal1 position equals: 5@2 .
+	self assert: game isOver not .
+]
+
+{ #category : #tests }
+GameTest >> testIsOver [
+
+	| game jack box1 goal1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	goal1 := Goal new name: 'Goal1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+	game movePlayerTowardRight: jack .
+	game moveBoxTowardRight: box1 .
+	self assert: jack position equals: 4@2 .
+	self assert: box1 position equals: 5@2 .
+	self assert: goal1 position equals: 5@2 .
+	self assert: box1 position equals: goal1 position .
+	self assert: game isOver .
+]
+
+{ #category : #tests }
 GameTest >> testMovePlayerADirectionRight [
 
 	| game jack |
@@ -190,6 +228,27 @@ WWWWWW
 ]
 
 { #category : #tests }
+GameTest >> testPrintingSimpleGameWithBoxAndGoalAtSamePosition [
+"les deux symboles sur la même case créent un décalage, il faudrait trouver une solution pour y remédier"
+	| game jack box1 goal1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	goal1 := Goal new name: 'Goal1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+	game movePlayerTowardRight: jack.
+	game moveBoxTowardRight: box1.
+	self assert: game printString equals: 
+'WWWWWW
+WWWPOXW
+WWWWWW
+WWWWWW
+' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
+]
+
+{ #category : #tests }
 GameTest >> testPrintingSimpleGameWithPlayer [
 
 	| game jack |
@@ -216,6 +275,42 @@ GameTest >> testPrintingSimpleGameWithPlayerAndBox [
 'WWWWW
 WPOWW
 WWWWW
+' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
+]
+
+{ #category : #tests }
+GameTest >> testPrintingSimpleGameWithPlayerAndBoxAndGoalAtGivenPosition [
+
+	| game jack box1 goal1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	goal1 := Goal new name: 'Goal1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+	self assert: game printString equals: 
+'WWWWWW
+WWPOXW
+WWWWWW
+WWWWWW
+' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
+]
+
+{ #category : #tests }
+GameTest >> testPrintingSimpleGameWithPlayerAndBoxAtGivenPosition [
+
+	| game jack box1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	self assert: game printString equals: 
+'WWWWWW
+WWPOWW
+WWWWWW
+WWWWWW
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 

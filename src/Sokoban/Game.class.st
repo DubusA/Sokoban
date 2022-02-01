@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'tiles',
 		'player',
-		'box',
+		'boxes',
+		'goals',
 		'movements'
 	],
 	#category : #Sokoban
@@ -14,7 +15,22 @@ Class {
 Game >> addBox: aBox [
 	((tiles at: 2) at: 3) addBox: aBox .
 	"il y a des murs autour du plateau de jeu donc on ne met rien en 1@1"	
-	aBox position: 3@2. "pour pouvoir avoir la position de la boite (pour ensuite pouvoir la déplacer)"
+	aBox position: 3@2 . "pour pouvoir avoir la position de la boite (pour ensuite pouvoir la déplacer)"
+	boxes add: aBox "ajout à la liste des boites (servira uniquement à la fin pour comparer les positions des boites aux positions des buts pour savoir si le jeu est fini"
+]
+
+{ #category : #adding }
+Game >> addBox: aBox atPoint: aPoint [
+	((tiles at: aPoint y) at: aPoint x) addBox: aBox .
+	aBox position: (aPoint x)@(aPoint y). "pour pouvoir avoir la position de la boite (pour ensuite pouvoir la déplacer)"
+	boxes add: aBox "ajout à la liste des boites (servira uniquement à la fin pour comparer les positions des boites aux positions des buts pour savoir si le jeu est fini"
+]
+
+{ #category : #adding }
+Game >> addGoal: aGoal atPoint: aPoint [
+	((tiles at: aPoint y) at: aPoint x) addGoal: aGoal .
+	aGoal position: (aPoint x)@(aPoint y). "pour pouvoir avoir la position du but"
+	goals add: aGoal "ajout à la liste des buts (servira uniquement à la fin pour comparer les positions des boites aux positions des buts pour savoir si le jeu est fini"
 ]
 
 { #category : #adding }
@@ -24,11 +40,25 @@ Game >> addPlayer: aPlayer [
 	aPlayer position: 2@2. "pour pouvoir avoir la position du joueur (pour ensuite pouvoir le déplacer)"
 ]
 
+{ #category : #adding }
+Game >> addPlayer: aPlayer atPoint: aPoint [
+	((tiles at: aPoint y) at: aPoint x) addPlayer: aPlayer .
+	aPlayer position: (aPoint x)@(aPoint y). "pour pouvoir avoir la position du joueur (pour ensuite pouvoir le déplacer)"
+]
+
 { #category : #initialization }
 Game >> initialize [ 
 	player := Point new. "position x et y du joueur"
-	box := OrderedCollection new. "collection de boites qui contiendra des points (position x et y)"
+	boxes := OrderedCollection new. "collection de boites qui contiendra des points (position x et y)"
+	goals := OrderedCollection new. "collection de buts qui contiendra des points (position x et y)"
 	movements := 0.
+]
+
+{ #category : #testing }
+Game >> isOver [ 
+"il faut regarder si les positions des boites sont les mêmes que les positions des buts"
+"on utilise les variables d'instance boxes (OrderedCollection) et goals (OrderedCollection) de la classe Game qui contiennent les listes de boites et de buts qui eux-mêmes ont une position"
+	^ (boxes collect: [ :eachBox | eachBox position ]) asSet = (goals collect: [ :eachGoal | eachGoal position ]) asSet
 ]
 
 { #category : #'as yet unclassified' }

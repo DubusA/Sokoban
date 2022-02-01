@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'players',
 		'boxes',
+		'goals',
 		'position'
 	],
 	#category : #Sokoban
@@ -13,6 +14,12 @@ Class {
 Tile >> addBox: aBox [
 	"il faut ajouter la boite à la liste de boites boxes qu'on a initialisée"
 	boxes add: aBox
+]
+
+{ #category : #adding }
+Tile >> addGoal: aGoal [
+	"il faut ajouter le joueur à la liste de joueurs players qu'on a initialisé"
+	goals add: aGoal
 ]
 
 { #category : #adding }
@@ -26,10 +33,16 @@ Tile >> boxes [
 	^ boxes
 ]
 
+{ #category : #accessing }
+Tile >> goals [ 
+	^ goals
+]
+
 { #category : #initialization }
 Tile >> initialize [ 
-	players := OrderedCollection new. "liste des joueur (point) présent sur les cases (0 ou 1 joueur)"
-	boxes := OrderedCollection new. "liste des boites présentes sur la case (0 ou 1 boite)"
+	players := OrderedCollection new. "liste des joueurs (point) présent sur la case (0 ou 1 joueur)"
+	boxes := OrderedCollection new. "liste des boites (point) présentes sur la case (0 ou 1 boite)"
+	goals := OrderedCollection new. "liste des but (point) présents sur la case (0 ou 1 but qui ne bouge pas)"
 ]
 
 { #category : #accessing }
