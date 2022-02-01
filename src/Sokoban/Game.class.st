@@ -14,7 +14,7 @@ Class {
 Game >> addBox: aBox [
 	((tiles at: 2) at: 3) addBox: aBox .
 	"il y a des murs autour du plateau de jeu donc on ne met rien en 1@1"	
-	aBox position: 2@3. "pour pouvoir avoir la position de la boite (pour ensuite pouvoir la déplacer)"
+	aBox position: 3@2. "pour pouvoir avoir la position de la boite (pour ensuite pouvoir la déplacer)"
 ]
 
 { #category : #adding }
@@ -136,7 +136,7 @@ Game >> sizeX: aNumberX sizeY: aNumberY [
 
 	tiles := Array new: aNumberY .
 	1 to: aNumberY do: [ :i | tiles at: i put: (Array new: aNumberX) ] .
-	1 to: aNumberY do: [ :i | 1 to: aNumberX do: [ :j | (tiles at: i) at: j put: (WallTile new position: i@j ) ] ] .
+	1 to: aNumberY do: [ :i | 1 to: aNumberX do: [ :j | (tiles at: i) at: j put: (WallTile new position: j@i ) ] ] .
 	"on met une case (tile) sur chaque position des collections de la collection"
 ]
 
@@ -148,25 +148,25 @@ Game >> tileAtX: aNumberX atY: aNumberY [
 { #category : #'as yet unclassified' }
 Game >> tileForPlayerOrBoxTowardDown: aPlayerOrBox [
 "donne la case où arrivera le joueur ou la boite après le déplacement"
-	^ self tileAtX: aPlayerOrBox position x + 1 atY: aPlayerOrBox position y
+	^ self tileAtX: aPlayerOrBox position x atY: aPlayerOrBox position y + 1
 ]
 
 { #category : #'as yet unclassified' }
 Game >> tileForPlayerOrBoxTowardLeft: aPlayerOrBox [
 "donne la case où arrivera le joueur ou la boite après le déplacement"
-	^ self tileAtX: aPlayerOrBox position x atY: aPlayerOrBox position y - 1
+	^ self tileAtX: aPlayerOrBox position x - 1 atY: aPlayerOrBox position y
 ]
 
 { #category : #'as yet unclassified' }
 Game >> tileForPlayerOrBoxTowardRight: aPlayerOrBox [
 "donne la case où arrivera le joueur ou la boite après le déplacement"
-	^ self tileAtX: aPlayerOrBox position x atY: aPlayerOrBox position y + 1
+	^ self tileAtX: aPlayerOrBox position x + 1 atY: aPlayerOrBox position y
 ]
 
 { #category : #'as yet unclassified' }
 Game >> tileForPlayerOrBoxTowardUp: aPlayerOrBox [
 "donne la case où arrivera le joueur ou la boite après le déplacement"
-	^ self tileAtX: aPlayerOrBox position x - 1 atY: aPlayerOrBox position y
+	^ self tileAtX: aPlayerOrBox position x atY: aPlayerOrBox position y - 1
 ]
 
 { #category : #'as yet unclassified' }
@@ -180,7 +180,7 @@ Game >> tileNumber: aNumber [
 { #category : #'as yet unclassified' }
 Game >> tileOfPlayerOrBox: aPlayerOrBox [ 
 "donne la case où se situe le joueur ou la boite (nécessaire pour implémenter le déplacement"
-	^ (tiles at: aPlayerOrBox position x) at: aPlayerOrBox position y
+	^ (tiles at: aPlayerOrBox position y) at: aPlayerOrBox position x
 ]
 
 { #category : #accessing }

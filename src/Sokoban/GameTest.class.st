@@ -22,7 +22,7 @@ GameTest >> testMovePlayerADirectionRight [
 	game movePlayerTowardRight: jack.
 	self assert: jack position equals: 3@2.
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
-	self assert: ((game tileAtX: 2 atY: 3 ) players includes: jack) .
+	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
 ]
 
 { #category : #tests }
@@ -38,10 +38,36 @@ GameTest >> testMovePlayerAndBoxADirectionRight [
 	game moveBoxTowardRight: box1.
 	self assert: jack position equals: 3@2.
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
-	self assert: ((game tileAtX: 2 atY: 3 ) players includes: jack) .
+	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
 	self assert: box1 position equals: 4@2.
 	self assert: (game tileAtX: 2 atY: 3 ) boxes isEmpty .
-	self assert: ((game tileAtX: 2 atY: 4 ) boxes includes: box1) .
+	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
+	
+]
+
+{ #category : #tests }
+GameTest >> testMovePlayerAndBoxADirectionRightAndPrinting [
+
+	| game jack box1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	game addPlayer: jack.
+	game addBox: box1.
+	game movePlayerTowardRight: jack.
+	game moveBoxTowardRight: box1.
+	self assert: jack position equals: 3@2.
+	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
+	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
+	self assert: box1 position equals: 4@2.
+	self assert: (game tileAtX: 2 atY: 3 ) boxes isEmpty .
+	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
+	self assert: game printString equals: 
+'WWWWWW
+WWPOWW
+WWWWWW
+WWWWWW
+'
 	
 ]
 
@@ -197,5 +223,5 @@ GameTest >> testTileOfPlayerOrBox [
 	game addPlayer: jack.
 	game addBox: box1.
 	self assert: (game tileOfPlayerOrBox: jack) position equals: 2@2.
-	self assert: (game tileOfPlayerOrBox: box1) position equals: 2@3.
+	self assert: (game tileOfPlayerOrBox: box1) position equals: 3@2.
 ]
