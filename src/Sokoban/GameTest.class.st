@@ -26,6 +26,32 @@ GameTest >> testMovePlayerADirectionRight [
 ]
 
 { #category : #tests }
+GameTest >> testMovePlayerAndBoxADirectionDownAndPrinting [
+
+	| game jack box1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	game addPlayer: jack.
+	game addBox: box1.
+	game movePlayerTowardDown: jack.
+	game moveBoxTowardDown: box1.
+	self assert: jack position equals: 2@3.
+	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
+	self assert: ((game tileAtX: 2 atY: 3 ) players includes: jack) .
+	self assert: box1 position equals: 3@3.
+	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
+	self assert: ((game tileAtX: 3 atY: 3 ) boxes includes: box1) .
+	self assert: game printString equals: 
+'WWWWWW
+WWWWWW
+WPOWWW
+WWWWWW
+'
+	
+]
+
+{ #category : #tests }
 GameTest >> testMovePlayerAndBoxADirectionRight [
 
 	| game jack box1 |
@@ -40,7 +66,7 @@ GameTest >> testMovePlayerAndBoxADirectionRight [
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
 	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
 	self assert: box1 position equals: 4@2.
-	self assert: (game tileAtX: 2 atY: 3 ) boxes isEmpty .
+	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
 	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
 	
 ]
@@ -60,7 +86,7 @@ GameTest >> testMovePlayerAndBoxADirectionRightAndPrinting [
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
 	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
 	self assert: box1 position equals: 4@2.
-	self assert: (game tileAtX: 2 atY: 3 ) boxes isEmpty .
+	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
 	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
 	self assert: game printString equals: 
 'WWWWWW
