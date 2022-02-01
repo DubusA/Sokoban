@@ -75,6 +75,7 @@ Game >> moveBoxTowardUp: aBox [
 Game >> movePlayerTowardDown: aPlayer [
 
 	| targetTile |
+	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardDown: aPlayer.
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
@@ -85,6 +86,7 @@ Game >> movePlayerTowardDown: aPlayer [
 Game >> movePlayerTowardLeft: aPlayer [
 
 	| targetTile |
+	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardLeft: aPlayer.
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
@@ -95,6 +97,7 @@ Game >> movePlayerTowardLeft: aPlayer [
 Game >> movePlayerTowardRight: aPlayer [
 
 	| targetTile |
+	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardRight: aPlayer.
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
@@ -105,10 +108,17 @@ Game >> movePlayerTowardRight: aPlayer [
 Game >> movePlayerTowardUp: aPlayer [
 
 	| targetTile |
+	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardUp: aPlayer.
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
+]
+
+{ #category : #accessing }
+Game >> movements [
+
+	^ movements 
 ]
 
 { #category : #accessing }

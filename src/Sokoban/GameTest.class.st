@@ -98,6 +98,34 @@ WWWWWW
 ]
 
 { #category : #tests }
+GameTest >> testMovePlayerAndBoxADirectionRightAndPrintingAndMovementsCount [
+
+	| game jack box1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	game addPlayer: jack.
+	game addBox: box1.
+	self assert: game movements equals: 0 .
+	game movePlayerTowardRight: jack.
+	game moveBoxTowardRight: box1.
+	self assert: game movements equals: 1 .
+	self assert: jack position equals: 3@2.
+	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
+	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
+	self assert: box1 position equals: 4@2.
+	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
+	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
+	self assert: game printString equals: 
+'WWWWWW
+WWPOWW
+WWWWWW
+WWWWWW
+'
+	
+]
+
+{ #category : #tests }
 GameTest >> testPlayerAndBoxAtStart [
 
 	| game jack box1 |
