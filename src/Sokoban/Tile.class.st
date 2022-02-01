@@ -59,3 +59,10 @@ Tile >> printOn: aStream [
 	aStream << '_' .
 	players do: [ :aPlayer | aPlayer printOn: aStream ].
 ]
+
+{ #category : #removing }
+Tile >> removePlayer: aPlayer [
+	"il faut retirer le joueur de la liste de joueurs players qu'on a initialisée"
+	"on avait utilisé  add:  pour ajouter un joueur, la méthode  remove:  existe aussi"
+	players remove: aPlayer
+]

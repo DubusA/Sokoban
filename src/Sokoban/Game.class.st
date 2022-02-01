@@ -31,6 +31,16 @@ Game >> initialize [
 	movements := 0.
 ]
 
+{ #category : #'as yet unclassified' }
+Game >> movePlayerTowardRight: aPlayer [
+
+	| targetTile |
+	targetTile := self tileForPlayerOrBoxTowardRight: aPlayer.
+	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
+	targetTile addPlayer: aPlayer.
+	aPlayer position: targetTile position.
+]
+
 { #category : #accessing }
 Game >> movements: aNumber [
 "nombre de mouvement effectués dans la partie"
@@ -66,27 +76,27 @@ Game >> tileAtX: aNumberX atY: aNumberY [
 ]
 
 { #category : #'as yet unclassified' }
-Game >> tileForPlayerTowardDown: aPlayer [
-
-	^ self tileAtX: aPlayer position x + 1 atY: aPlayer position y
+Game >> tileForPlayerOrBoxTowardDown: aPlayerOrBox [
+"donne la case où arrivera le joueur ou la boite après le déplacement"
+	^ self tileAtX: aPlayerOrBox position x + 1 atY: aPlayerOrBox position y
 ]
 
 { #category : #'as yet unclassified' }
-Game >> tileForPlayerTowardLeft: aPlayer [
-
-	^ self tileAtX: aPlayer position x atY: aPlayer position y - 1
+Game >> tileForPlayerOrBoxTowardLeft: aPlayerOrBox [
+"donne la case où arrivera le joueur ou la boite après le déplacement"
+	^ self tileAtX: aPlayerOrBox position x atY: aPlayerOrBox position y - 1
 ]
 
 { #category : #'as yet unclassified' }
-Game >> tileForPlayerTowardRight: aPlayer [
-
-	^ self tileAtX: aPlayer position x atY: aPlayer position y + 1
+Game >> tileForPlayerOrBoxTowardRight: aPlayerOrBox [
+"donne la case où arrivera le joueur ou la boite après le déplacement"
+	^ self tileAtX: aPlayerOrBox position x atY: aPlayerOrBox position y + 1
 ]
 
 { #category : #'as yet unclassified' }
-Game >> tileForPlayerTowardUp: aPlayer [
-
-	^ self tileAtX: aPlayer position x - 1 atY: aPlayer position y
+Game >> tileForPlayerOrBoxTowardUp: aPlayerOrBox [
+"donne la case où arrivera le joueur ou la boite après le déplacement"
+	^ self tileAtX: aPlayerOrBox position x - 1 atY: aPlayerOrBox position y
 ]
 
 { #category : #'as yet unclassified' }
@@ -95,6 +105,12 @@ Game >> tileNumber: aNumber [
 "	tiles := Array new: aNumber .
 	1 to: aNumber do: [ :i | tiles at: i put: (SLTile new position: i) ] . "
 	
+]
+
+{ #category : #'as yet unclassified' }
+Game >> tileOfPlayerOrBox: aPlayerOrBox [ 
+"donne la case où se situe le joueur ou la boite (nécessaire pour implémenter le déplacement"
+	^ (tiles at: aPlayerOrBox position x) at: aPlayerOrBox position y
 ]
 
 { #category : #accessing }

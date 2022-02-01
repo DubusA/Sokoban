@@ -13,6 +13,19 @@ GameTest >> testCheckingSimpleGame [
 ]
 
 { #category : #tests }
+GameTest >> testMovePlayerADirectionRight [
+
+	| game jack |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack.
+	game movePlayerTowardRight: jack.
+	self assert: jack position equals: 3@2.
+	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
+	self assert: ((game tileAtX: 2 atY: 3 ) players includes: jack) .
+]
+
+{ #category : #tests }
 GameTest >> testPlayerAndBoxAtStart [
 
 	| game jack box1|
@@ -115,41 +128,54 @@ GameTest >> testTileAt [
 ]
 
 { #category : #tests }
-GameTest >> testTileForPlayerTowardDown [
+GameTest >> testTileForPlayerOrBoxTowardDown [
 
 	| game jack |
 	game := Game new sizeX: 5 sizeY: 3.
 	jack := Player new name: 'Jack'.
 	game addPlayer: jack.
-	self assert: (game tileForPlayerTowardDown: jack) position equals: 2@3.
+	self assert: (game tileForPlayerOrBoxTowardDown: jack) position equals: 2@3.
 ]
 
 { #category : #tests }
-GameTest >> testTileForPlayerTowardLeft [
+GameTest >> testTileForPlayerOrBoxTowardLeft [
 
 	| game jack |
 	game := Game new sizeX: 5 sizeY: 3.
 	jack := Player new name: 'Jack'.
 	game addPlayer: jack.
-	self assert: (game tileForPlayerTowardLeft: jack) position equals: 1@2.
+	self assert: (game tileForPlayerOrBoxTowardLeft: jack) position equals: 1@2.
 ]
 
 { #category : #tests }
-GameTest >> testTileForPlayerTowardRight [
+GameTest >> testTileForPlayerOrBoxTowardRight [
 
 	| game jack |
 	game := Game new sizeX: 5 sizeY: 3.
 	jack := Player new name: 'Jack'.
 	game addPlayer: jack.
-	self assert: (game tileForPlayerTowardRight: jack) position equals: 3@2.
+	self assert: (game tileForPlayerOrBoxTowardRight: jack) position equals: 3@2.
 ]
 
 { #category : #tests }
-GameTest >> testTileForPlayerTowardUp [
+GameTest >> testTileForPlayerOrBoxTowardUp [
 
 	| game jack |
 	game := Game new sizeX: 5 sizeY: 3.
 	jack := Player new name: 'Jack'.
 	game addPlayer: jack.
-	self assert: (game tileForPlayerTowardUp: jack) position equals: 2@1.
+	self assert: (game tileForPlayerOrBoxTowardUp: jack) position equals: 2@1.
+]
+
+{ #category : #tests }
+GameTest >> testTileOfPlayerOrBox [
+
+	| game jack box1 |
+	game := Game new sizeX: 5 sizeY: 3.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	game addPlayer: jack.
+	game addBox: box1.
+	self assert: (game tileOfPlayerOrBox: jack) position equals: 2@2.
+	self assert: (game tileOfPlayerOrBox: box1) position equals: 2@3.
 ]
