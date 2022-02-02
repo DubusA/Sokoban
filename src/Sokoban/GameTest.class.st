@@ -68,7 +68,7 @@ GameTest >> testIsOverWithTwoBoxes [
 	game moveBoxTowardRight: box1 .
 	game moveBoxTowardRight: box2 .
 	self assert: jack position equals: 3@2 .
-	self assert: box1 position equals: 5@3 .
+	self assert: box1 position equals: 5@3.
 	self assert: box2 position equals: 5@2 .
 	self assert: box1 position equals: goal2 position .
 	self assert: box2 position equals: goal1 position .
