@@ -11,7 +11,7 @@ BoxTile >> printOn: aStream [
 	"2e version : condition pour remplacer l'affichage si on a un joueur ou une boite sur la case"
 	(players isEmpty & boxes isEmpty & goals isEmpty) ifTrue: [ aStream << 'O' ]
 	ifFalse: [ players isNotEmpty ifTrue: [ players do: [ :aPlayer | aPlayer printOn: aStream ] ]
-		ifFalse: [ boxes isNotEmpty ifTrue: [ boxes do: [ :aBox | aBox printOn: aStream ] ] 
-			ifFalse: [ goals do: [ :aGoal | aGoal printOn: aStream ] ] ] ]
-				  
+		ifFalse: [ boxes isNotEmpty ifTrue: [ boxes do: [ :aBox | aBox printOn: aStream ] ]
+			ifFalse: [ goals isNotEmpty ifTrue: [ goals do: [ :aGoal | aGoal printOn: aStream ] ] 
+				ifFalse: [ walls do: [ :aWall | aWall printOn: aStream ] ] ] ] ]
 ]

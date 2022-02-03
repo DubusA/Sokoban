@@ -42,10 +42,10 @@ GameTest >> testIsOver [
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
 	self assert: game printString equals: 
-'WWWWWW
-WWPOXW
-WWWWWW
-WWWWWW
+'______
+__POX_
+______
+______
 ' .
 	game movePlayerTowardRight: jack .
 	"game moveBoxTowardRight: box1 ." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
@@ -55,10 +55,10 @@ WWWWWW
 	self assert: box1 position equals: goal1 position .
 	self assert: game isOver .
 	self assert: game printString equals: 
-'WWWWWW
-WWWPOW
-WWWWWW
-WWWWWW
+'______
+___PO_
+______
+______
 '
 ]
 
@@ -118,10 +118,10 @@ GameTest >> testMovePlayerAndBoxADirectionDownAndPrinting [
 	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
 	self assert: ((game tileAtX: 3 atY: 3 ) boxes includes: box1) .
 	self assert: game printString equals: 
-'WWWWWW
-WWWWWW
-WPOWWW
-WWWWWW
+'______
+______
+_PO___
+______
 '
 	
 ]
@@ -164,10 +164,10 @@ GameTest >> testMovePlayerAndBoxADirectionRightAndPrinting [
 	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
 	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
 	self assert: game printString equals: 
-'WWWWWW
-WWPOWW
-WWWWWW
-WWWWWW
+'______
+__PO__
+______
+______
 '
 	
 ]
@@ -192,10 +192,10 @@ GameTest >> testMovePlayerAndBoxADirectionRightAndPrintingAndMovementsCount [
 	self assert: (game tileAtX: 3 atY: 2 ) boxes isEmpty .
 	self assert: ((game tileAtX: 4 atY: 2 ) boxes includes: box1) .
 	self assert: game printString equals: 
-'WWWWWW
-WWPOWW
-WWWWWW
-WWWWWW
+'______
+__PO__
+______
+______
 '
 	
 ]
@@ -241,9 +241,9 @@ GameTest >> testPrintingSimpleGame [
 	self 
 		assert: game printString 
 		equals: 
-'WWWWW
-WWWWW
-WWWWW
+'_____
+_____
+_____
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -253,14 +253,14 @@ GameTest >> testPrintingSimpleGameV2 [
 	game := Game new sizeX: 6 sizeY: 4.
 	(game tiles at: 2) at: 2 put: (PlayerTile new position: 2@2).
 	(game tiles at: 2) at: 3 put: (BoxTile new position: 2@3).
-	(game tiles at: 2) at: 4 put: (Tile new position: 2@4).
+	(game tiles at: 2) at: 4 put: (Tile new position: 2@4)."Tile et EmptyTile revient au même"
 	(game tiles at: 2) at: 5 put: (GoalTile new position: 2@5).
 	2 to: 5 do: [ :i | (game tiles at: 3) at: i put: (Tile new position: 3@i) ].
 	self assert: game printString equals: 
-'WWWWWW
-WPO_XW
-W____W
-WWWWWW
+'______
+_PO_X_
+______
+______
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -276,18 +276,18 @@ GameTest >> testPrintingSimpleGameWithBoxAndGoalAtSamePosition [
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
 	self assert: game printString equals: 
-'WWWWWW
-WWPOXW
-WWWWWW
-WWWWWW
+'______
+__POX_
+______
+______
 ' .
 	game movePlayerTowardRight: jack.
 	"game moveBoxTowardRight: box1." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: game printString equals: 
-'WWWWWW
-WWWPOW
-WWWWWW
-WWWWWW
+'______
+___PO_
+______
+______
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -299,9 +299,9 @@ GameTest >> testPrintingSimpleGameWithPlayer [
 	jack := Player new name: 'Jack'.
 	game addPlayer: jack.
 	self assert: game printString equals: 
-'WWWWW
-WPWWW
-WWWWW
+'_____
+_P___
+_____
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -315,9 +315,9 @@ GameTest >> testPrintingSimpleGameWithPlayerAndBox [
 	game addPlayer: jack.
 	game addBox: box1.
 	self assert: game printString equals: 
-'WWWWW
-WPOWW
-WWWWW
+'_____
+_PO__
+_____
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -333,10 +333,10 @@ GameTest >> testPrintingSimpleGameWithPlayerAndBoxAndGoalAtGivenPosition [
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
 	self assert: game printString equals: 
-'WWWWWW
-WWPOXW
-WWWWWW
-WWWWWW
+'______
+__POX_
+______
+______
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -350,10 +350,10 @@ GameTest >> testPrintingSimpleGameWithPlayerAndBoxAtGivenPosition [
 	game addPlayer: jack atPoint: 3@2 .
 	game addBox: box1 atPoint: 4@2 .
 	self assert: game printString equals: 
-'WWWWWW
-WWPOWW
-WWWWWW
-WWWWWW
+'______
+__PO__
+______
+______
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
 ]
 
@@ -362,7 +362,7 @@ GameTest >> testTileAt [
 
 	| game |
 	game := Game new sizeX: 5 sizeY: 3.
-	self assert: (game tileAtX: 3 atY: 1) printString equals: 'W'
+	self assert: (game tileAtX: 3 atY: 1) printString equals: '_'
 ]
 
 { #category : #tests }

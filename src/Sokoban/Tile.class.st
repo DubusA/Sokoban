@@ -5,6 +5,7 @@ Class {
 		'players',
 		'boxes',
 		'goals',
+		'walls',
 		'position'
 	],
 	#category : #Sokoban
@@ -18,7 +19,7 @@ Tile >> addBox: aBox [
 
 { #category : #adding }
 Tile >> addGoal: aGoal [
-	"il faut ajouter le joueur à la liste de joueurs players qu'on a initialisé"
+	"il faut ajouter le but à la liste de buts goals qu'on a initialisée"
 	goals add: aGoal
 ]
 
@@ -26,6 +27,12 @@ Tile >> addGoal: aGoal [
 Tile >> addPlayer: aPlayer [
 	"il faut ajouter le joueur à la liste de joueurs players qu'on a initialisé"
 	players add: aPlayer
+]
+
+{ #category : #adding }
+Tile >> addWall: aWall [
+	"il faut ajouter le mur à la liste des murs walls qu'on a initialisée"
+	walls add: aWall 
 ]
 
 { #category : #accessing }
@@ -42,7 +49,8 @@ Tile >> goals [
 Tile >> initialize [ 
 	players := OrderedCollection new. "liste des joueurs (point) présent sur la case (0 ou 1 joueur)"
 	boxes := OrderedCollection new. "liste des boites (point) présentes sur la case (0 ou 1 boite)"
-	goals := OrderedCollection new. "liste des but (point) présents sur la case (0 ou 1 but qui ne bouge pas)"
+	goals := OrderedCollection new. "liste des buts (point) présents sur la case (0 ou 1 but qui ne bouge pas)"
+	walls := OrderedCollection new. "liste des murs (point) présents sur la case (0 ou 1 mur qui ne bouge pas)"
 ]
 
 { #category : #accessing }
@@ -85,4 +93,9 @@ Tile >> removePlayer: aPlayer [
 	"il faut retirer le joueur de la liste de joueurs players qu'on a initialisée"
 	"on avait utilisé  add:  pour ajouter un joueur, la méthode  remove:  existe aussi"
 	players remove: aPlayer
+]
+
+{ #category : #accessing }
+Tile >> walls [ 
+	^ walls
 ]

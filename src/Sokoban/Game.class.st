@@ -180,7 +180,7 @@ Game >> sizeX: aNumberX sizeY: aNumberY [
 
 	tiles := Array new: aNumberY .
 	1 to: aNumberY do: [ :i | tiles at: i put: (Array new: aNumberX) ] .
-	1 to: aNumberY do: [ :i | 1 to: aNumberX do: [ :j | (tiles at: i) at: j put: (WallTile new position: j@i ) ] ] .
+	1 to: aNumberY do: [ :i | 1 to: aNumberX do: [ :j | (tiles at: i) at: j put: (EmptyTile new position: j@i ) ] ] .
 	"on met une case (tile) sur chaque position des collections de la collection"
 ]
 
