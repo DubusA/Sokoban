@@ -41,6 +41,12 @@ GameTest >> testIsOver [
 	game addPlayer: jack atPoint: 3@2 .
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
+	self assert: game printString equals: 
+'WWWWWW
+WWPOXW
+WWWWWW
+WWWWWW
+' .
 	game movePlayerTowardRight: jack .
 	"game moveBoxTowardRight: box1 ." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: jack position equals: 4@2 .
@@ -48,6 +54,12 @@ GameTest >> testIsOver [
 	self assert: goal1 position equals: 5@2 .
 	self assert: box1 position equals: goal1 position .
 	self assert: game isOver .
+	self assert: game printString equals: 
+'WWWWWW
+WWWPOW
+WWWWWW
+WWWWWW
+'
 ]
 
 { #category : #tests }
@@ -263,11 +275,17 @@ GameTest >> testPrintingSimpleGameWithBoxAndGoalAtSamePosition [
 	game addPlayer: jack atPoint: 3@2 .
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
+	self assert: game printString equals: 
+'WWWWWW
+WWPOXW
+WWWWWW
+WWWWWW
+' .
 	game movePlayerTowardRight: jack.
 	"game moveBoxTowardRight: box1." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: game printString equals: 
 'WWWWWW
-WWWPOXW
+WWWPOW
 WWWWWW
 WWWWWW
 ' "on initialise avec uniquement des murs" "mettre un espace au début de chaque ligne pour aligner"
