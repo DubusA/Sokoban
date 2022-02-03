@@ -6,6 +6,7 @@ Class {
 		'player',
 		'boxes',
 		'goals',
+		'walls',
 		'movements'
 	],
 	#category : #Sokoban
@@ -46,11 +47,19 @@ Game >> addPlayer: aPlayer atPoint: aPoint [
 	aPlayer position: (aPoint x)@(aPoint y). "pour pouvoir avoir la position du joueur (pour ensuite pouvoir le déplacer)"
 ]
 
+{ #category : #adding }
+Game >> addWall: aWall atPoint: aPoint [
+	((tiles at: aPoint y) at: aPoint x) addWall: aWall .
+	aWall position: (aPoint x)@(aPoint y). "pour pouvoir avoir la position du mur"
+	walls add: aWall "ajout à la liste des murs"
+]
+
 { #category : #initialization }
 Game >> initialize [ 
 	player := Point new. "position x et y du joueur"
 	boxes := OrderedCollection new. "collection de boites qui contiendra des points (position x et y)"
 	goals := OrderedCollection new. "collection de buts qui contiendra des points (position x et y)"
+	walls := OrderedCollection new. "collection de murs qui contiendra des points (position x et y)"
 	movements := 0.
 ]
 
