@@ -107,6 +107,7 @@ Game >> movePlayerTowardDown: aPlayer [
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardDown: aPlayer.
+	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardDown: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
@@ -118,6 +119,7 @@ Game >> movePlayerTowardLeft: aPlayer [
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardLeft: aPlayer.
+	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardLeft: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
@@ -129,6 +131,7 @@ Game >> movePlayerTowardRight: aPlayer [
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardRight: aPlayer.
+	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardRight: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
@@ -140,6 +143,7 @@ Game >> movePlayerTowardUp: aPlayer [
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardUp: aPlayer.
+	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardUp: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.

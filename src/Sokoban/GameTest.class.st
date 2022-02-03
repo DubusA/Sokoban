@@ -42,7 +42,7 @@ GameTest >> testIsOver [
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
 	game movePlayerTowardRight: jack .
-	game moveBoxTowardRight: box1 .
+	"game moveBoxTowardRight: box1 ." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: jack position equals: 4@2 .
 	self assert: box1 position equals: 5@2 .
 	self assert: goal1 position equals: 5@2 .
@@ -124,7 +124,7 @@ GameTest >> testMovePlayerAndBoxADirectionRight [
 	game addPlayer: jack.
 	game addBox: box1.
 	game movePlayerTowardRight: jack.
-	game moveBoxTowardRight: box1.
+	"game moveBoxTowardRight: box1." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: jack position equals: 3@2.
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
 	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
@@ -144,7 +144,7 @@ GameTest >> testMovePlayerAndBoxADirectionRightAndPrinting [
 	game addPlayer: jack.
 	game addBox: box1.
 	game movePlayerTowardRight: jack.
-	game moveBoxTowardRight: box1.
+	"game moveBoxTowardRight: box1." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: jack position equals: 3@2.
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
 	self assert: ((game tileAtX: 3 atY: 2 ) players includes: jack) .
@@ -171,7 +171,7 @@ GameTest >> testMovePlayerAndBoxADirectionRightAndPrintingAndMovementsCount [
 	game addBox: box1.
 	self assert: game movements equals: 0 .
 	game movePlayerTowardRight: jack.
-	game moveBoxTowardRight: box1.
+	"game moveBoxTowardRight: box1." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: game movements equals: 1 .
 	self assert: jack position equals: 3@2.
 	self assert: (game tileAtX: 2 atY: 2 ) players isEmpty .
@@ -264,7 +264,7 @@ GameTest >> testPrintingSimpleGameWithBoxAndGoalAtSamePosition [
 	game addBox: box1 atPoint: 4@2 .
 	game addGoal: goal1 atPoint: 5@2 .
 	game movePlayerTowardRight: jack.
-	game moveBoxTowardRight: box1.
+	"game moveBoxTowardRight: box1." "plus besoin de déplacer les boites, c'est le joueur qui les pousse en se déplacant"
 	self assert: game printString equals: 
 'WWWWWW
 WWWPOXW
