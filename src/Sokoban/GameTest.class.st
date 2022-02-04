@@ -5,6 +5,35 @@ Class {
 }
 
 { #category : #tests }
+GameTest >> testCanMoveTowardRight [
+
+	| game jack box1 goal1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	goal1 := Goal new name: 'Goal1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+	game addWall: Wall new atPoint: 6@2 .
+	self assert: game printString equals: 
+'______
+__POXW
+______
+______
+' .
+	self assert: (game playerOrBoxCanMoveTowardRight: jack).
+	game movePlayerTowardRight: jack .
+	self assert: game printString equals: 
+'______
+___POW
+______
+______
+' .
+	self deny: (game playerOrBoxCanMoveTowardRight: jack).
+]
+
+{ #category : #tests }
 GameTest >> testCheckingSimpleGame [
 
 	| game |
@@ -231,6 +260,51 @@ GameTest >> testPlayerAtStartIsAtPosition1at1 [
 	jack := Player new name: 'Jack'.
 	game addPlayer: jack.
 	self assert: jack position equals: 2@2 .
+]
+
+{ #category : #tests }
+GameTest >> testPlayerDontMoveInAWall [
+
+	| game jack box1 goal1 |
+	game := Game new sizeX: 6 sizeY: 4.
+	jack := Player new name: 'Jack'.
+	box1 := Box new name: 'Box1'.
+	goal1 := Goal new name: 'Goal1'.
+	game addPlayer: jack atPoint: 3@2 .
+	game addBox: box1 atPoint: 4@2 .
+	game addGoal: goal1 atPoint: 5@2 .
+	game addWall: Wall new atPoint: 6@2 .
+	self assert: game printString equals: 
+'______
+__POXW
+______
+______
+' .
+	self assert: (game playerOrBoxCanMoveTowardRight: jack).
+	game movePlayerTowardRight: jack .
+	self assert: game printString equals: 
+'______
+___POW
+______
+______
+' .
+	self deny: (game playerOrBoxCanMoveTowardRight: jack).
+	game movePlayerTowardRight: jack.
+	self assert: game printString equals: 
+'______
+___POW
+______
+______
+' .
+	game movePlayerTowardRight: jack. "on peut essayer de bouger autant de fois que l'on veut le joueur, il ne bougera pas s'il y a un mur"
+	game movePlayerTowardRight: jack.
+	game movePlayerTowardRight: jack.
+	self assert: game printString equals: 
+'______
+___POW
+______
+______
+' .
 ]
 
 { #category : #tests }

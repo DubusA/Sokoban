@@ -112,7 +112,7 @@ Game >> moveBoxTowardUp: aBox [
 
 { #category : #'as yet unclassified' }
 Game >> movePlayerTowardDown: aPlayer [
-
+(self playerOrBoxCanMoveTowardDown: aPlayer) ifTrue: [ 
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardDown: aPlayer.
@@ -121,10 +121,11 @@ Game >> movePlayerTowardDown: aPlayer [
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
 ]
+]
 
 { #category : #'as yet unclassified' }
 Game >> movePlayerTowardLeft: aPlayer [
-
+(self playerOrBoxCanMoveTowardLeft: aPlayer) ifTrue: [ 
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardLeft: aPlayer.
@@ -133,10 +134,11 @@ Game >> movePlayerTowardLeft: aPlayer [
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
 ]
+]
 
 { #category : #'as yet unclassified' }
 Game >> movePlayerTowardRight: aPlayer [
-
+(self playerOrBoxCanMoveTowardRight: aPlayer) ifTrue: [ 
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardRight: aPlayer.
@@ -144,11 +146,12 @@ Game >> movePlayerTowardRight: aPlayer [
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
+].
 ]
 
 { #category : #'as yet unclassified' }
 Game >> movePlayerTowardUp: aPlayer [
-
+(self playerOrBoxCanMoveTowardUp: aPlayer) ifTrue: [ 
 	| targetTile |
 	movements := movements + 1 .
 	targetTile := self tileForPlayerOrBoxTowardUp: aPlayer.
@@ -156,6 +159,7 @@ Game >> movePlayerTowardUp: aPlayer [
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
 	aPlayer position: targetTile position.
+]
 ]
 
 { #category : #accessing }
@@ -168,6 +172,46 @@ Game >> movements [
 Game >> movements: aNumber [
 "nombre de mouvement effectués dans la partie"
 	movements := aNumber 
+]
+
+{ #category : #'as yet unclassified' }
+Game >> playerOrBoxCanMoveTowardDown: aPlayerOrBox [
+"on vérifie qu'il n'y a pas de mur sur la case visée et que s'il y a une boite elle peut aussi bouger dans la direction donnée"
+	| targetTile result |
+	targetTile := self tileForPlayerOrBoxTowardDown: aPlayerOrBox.
+	result := true .
+	targetTile boxes isNotEmpty ifTrue: [ targetTile boxes do: [ :eachBox | result := result & (self playerOrBoxCanMoveTowardDown: eachBox) ] ] ."on vérifie que les boites peuvent bouger"
+	^ targetTile walls isEmpty & result. "et qu'il n'y a pas de mur"
+]
+
+{ #category : #'as yet unclassified' }
+Game >> playerOrBoxCanMoveTowardLeft: aPlayerOrBox [
+"on vérifie qu'il n'y a pas de mur sur la case visée et que s'il y a une boite elle peut aussi bouger dans la direction donnée"
+	| targetTile result |
+	targetTile := self tileForPlayerOrBoxTowardLeft: aPlayerOrBox.
+	result := true .
+	targetTile boxes isNotEmpty ifTrue: [ targetTile boxes do: [ :eachBox | result := result & (self playerOrBoxCanMoveTowardLeft: eachBox) ] ] ."on vérifie que les boites peuvent bouger"
+	^ targetTile walls isEmpty & result. "et qu'il n'y a pas de mur"
+]
+
+{ #category : #'as yet unclassified' }
+Game >> playerOrBoxCanMoveTowardRight: aPlayerOrBox [
+"on vérifie qu'il n'y a pas de mur sur la case visée et que s'il y a une boite elle peut aussi bouger dans la direction donnée"
+	| targetTile result |
+	targetTile := self tileForPlayerOrBoxTowardRight: aPlayerOrBox.
+	result := true .
+	targetTile boxes isNotEmpty ifTrue: [ targetTile boxes do: [ :eachBox | result := result & (self playerOrBoxCanMoveTowardRight: eachBox) ] ] ."on vérifie que les boites peuvent bouger"
+	^ targetTile walls isEmpty & result. "et qu'il n'y a pas de mur"
+]
+
+{ #category : #'as yet unclassified' }
+Game >> playerOrBoxCanMoveTowardUp: aPlayerOrBox [
+"on vérifie qu'il n'y a pas de mur sur la case visée et que s'il y a une boite elle peut aussi bouger dans la direction donnée"
+	| targetTile result |
+	targetTile := self tileForPlayerOrBoxTowardUp: aPlayerOrBox.
+	result := true .
+	targetTile boxes isNotEmpty ifTrue: [ targetTile boxes do: [ :eachBox | result := result & (self playerOrBoxCanMoveTowardUp: eachBox) ] ] ."on vérifie que les boites peuvent bouger"
+	^ targetTile walls isEmpty & result. "et qu'il n'y a pas de mur"
 ]
 
 { #category : #printing }
