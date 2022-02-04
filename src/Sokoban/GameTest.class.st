@@ -476,6 +476,110 @@ WWWWWWWW
 ]
 
 { #category : #tests }
+GameTest >> testSokobanLevel1IsOverWithoutNameDeclaration [
+
+	| game jack |
+	game := Game new sizeX: 8 sizeY: 9.
+	jack := Player new name: 'Jack'.
+	game addPlayer: jack atPoint: 3@3 .
+	game addBox: Box new atPoint: 4@3 .
+	game addBox: Box new atPoint: 5@4 .
+	game addBox: Box new atPoint: 5@5 .
+	game addBox: Box new atPoint: 2@7 .
+	game addBox: Box new atPoint: 4@7 .
+	game addBox: Box new atPoint: 5@7 .
+	game addBox: Box new atPoint: 6@7 .
+	game addGoal: Goal new atPoint: 2@3 .
+	game addGoal: Goal new atPoint: 6@4 .
+	game addGoal: Goal new atPoint: 2@5 .
+	game addGoal: Goal new atPoint: 5@6 .
+	game addGoal: Goal new atPoint: 4@7 .
+	game addGoal: Goal new atPoint: 7@7 .
+	game addGoal: Goal new atPoint: 5@8 .
+	1 to: 8 do: [ :i | game addWall: Wall new atPoint: i@1 .
+							game addWall: Wall new atPoint: i@9 ] .
+	2 to: 8 do: [ :i | game addWall: Wall new atPoint: 1@i .
+							game addWall: Wall new atPoint: 8@i ] .
+	2 to: 6 do: [ :i | game addWall: Wall new atPoint: 7@i ] .
+	4 to: 6 do: [ :i | game addWall: Wall new atPoint: 3@i ] .
+	2 to: 3 do: [ :i | game addWall: Wall new atPoint: i@2 ] .
+	game addWall: Wall new atPoint: 2@4 .
+	game addWall: Wall new atPoint: 4@5 .
+	self assert: game printString equals: 
+'WWWWWWWW
+WWW___WW
+WXPO__WW
+WWW_OXWW
+WXWWO_WW
+W_W_X_WW
+WO_OOOXW
+W___X__W
+WWWWWWWW
+' .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardRight: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardDown: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardLeft: jack .
+	game movePlayerTowardUp: jack .
+	game movePlayerTowardRight: jack . 
+	self assert: game isOver .
+	self assert: game movements equals: 48 .
+	self assert: game printString equals: 
+'WWWWWWWW
+WWW___WW
+WO____WW
+WWW__OWW
+WOWW__WW
+W_W_O_WW
+W_PO__OW
+W___O__W
+WWWWWWWW
+' . 
+]
+
+{ #category : #tests }
 GameTest >> testSokobanLevel1Printing [
 
 	| game jack box1 box2 box3 box4 box5 box6 box7 goal1 goal2 goal3 goal4 goal5 goal6 goal7 |
