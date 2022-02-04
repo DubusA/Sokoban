@@ -110,56 +110,60 @@ Game >> moveBoxTowardUp: aBox [
 	aBox position: targetTile position.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Game >> movePlayerTowardDown: aPlayer [
-(self playerOrBoxCanMoveTowardDown: aPlayer) ifTrue: [ 
+
 	| targetTile |
-	movements := movements + 1 .
+	(self playerOrBoxCanMoveTowardDown: aPlayer) ifFalse: [ ^ self ]. "ne fait rien si le joueur ne peut pas bouger"
+	movements := movements + 1.
 	targetTile := self tileForPlayerOrBoxTowardDown: aPlayer.
-	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardDown: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
+	targetTile boxes isNotEmpty ifTrue: [ 
+		targetTile boxes do: [ :eachBox | self moveBoxTowardDown: eachBox ] ]. "pour déplacer la boite si le joueur la pousse"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
-	aPlayer position: targetTile position.
-]
+	aPlayer position: targetTile position
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Game >> movePlayerTowardLeft: aPlayer [
-(self playerOrBoxCanMoveTowardLeft: aPlayer) ifTrue: [ 
+
 	| targetTile |
-	movements := movements + 1 .
+	(self playerOrBoxCanMoveTowardLeft: aPlayer) ifFalse: [ ^ self ]. "ne fait rien si le joueur ne peut pas bouger"
+	movements := movements + 1.
 	targetTile := self tileForPlayerOrBoxTowardLeft: aPlayer.
-	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardLeft: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
+	targetTile boxes isNotEmpty ifTrue: [ 
+		targetTile boxes do: [ :eachBox | self moveBoxTowardLeft: eachBox ] ]. "pour déplacer la boite si le joueur la pousse"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
-	aPlayer position: targetTile position.
-]
+	aPlayer position: targetTile position
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Game >> movePlayerTowardRight: aPlayer [
-(self playerOrBoxCanMoveTowardRight: aPlayer) ifTrue: [ 
+
 	| targetTile |
-	movements := movements + 1 .
+	(self playerOrBoxCanMoveTowardRight: aPlayer) ifFalse: [ ^ self ]. "ne fait rien si le joueur ne peut pas bouger"
+	movements := movements + 1.
 	targetTile := self tileForPlayerOrBoxTowardRight: aPlayer.
-	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardRight: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
+	targetTile boxes isNotEmpty ifTrue: [ 
+		targetTile boxes do: [ :eachBox | self moveBoxTowardRight: eachBox ] ]. "pour déplacer la boite si le joueur la pousse"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
-	aPlayer position: targetTile position.
-].
+	aPlayer position: targetTile position
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Game >> movePlayerTowardUp: aPlayer [
-(self playerOrBoxCanMoveTowardUp: aPlayer) ifTrue: [ 
+
 	| targetTile |
-	movements := movements + 1 .
+	(self playerOrBoxCanMoveTowardUp: aPlayer) ifFalse: [ ^ self ]. "ne fait rien si le joueur ne peut pas bouger"
+	movements := movements + 1.
 	targetTile := self tileForPlayerOrBoxTowardUp: aPlayer.
-	(targetTile boxes isNotEmpty) ifTrue: [ targetTile boxes do: [ :eachBox | self moveBoxTowardUp: eachBox ] ] . "pour déplacer la boite si le joueur la pousse" "il faudrait aussi vérifier que le déplacement est possible (pas de mur ou d'autre boite)"
+	targetTile boxes isNotEmpty ifTrue: [ 
+		targetTile boxes do: [ :eachBox | self moveBoxTowardUp: eachBox ] ]. "pour déplacer la boite si le joueur la pousse"
 	(self tileOfPlayerOrBox: aPlayer) removePlayer: aPlayer.
 	targetTile addPlayer: aPlayer.
-	aPlayer position: targetTile position.
-]
+	aPlayer position: targetTile position
 ]
 
 { #category : #accessing }
